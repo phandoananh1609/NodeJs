@@ -13,15 +13,12 @@ class SitesController {
     search(req, res) {
         res.render('search');
     }
-    home(req, res) {
-        Course.find({}, function(err, cac) {
-            if(!err){
-                res.json(cac);
-                return;
-            }
-            res.status(400).json({error: "Error"});
-        })
+    home(req, res, next) {
+
         // res.render('home');
+        Course.find({})
+            .then(courses => res.render('home'))
+            .catch(error => next(error));
     }
 }
 
