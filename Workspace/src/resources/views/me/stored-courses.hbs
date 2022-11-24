@@ -6,16 +6,20 @@
             <th scope="col">#</th>
             <th scope="col">Tên khoá học</th>
             <th scope="col">Trình Độ</th>
-            <th scope="col">Thời gian khoá học</th>
+            <th scope="col" col-span="2">Thời gian khoá học</th
         </tr>
     </thead>
     <tbody>
         {{#each courses}}
         <tr>
-            <th scope="row">{{@index}}</th>
+            <th scope="row">{{sum @index 1}}</th>
             <td>{{this.name}}</td>
             <td>{{this.level}}</td>
-            <td>{{this.createAt}}</td>
+            <td>{{this.createdAt}}</td>
+            <td>
+                <a href="/courses/{{this._id}}/edit" class="btn btn-link">sửa</a>
+                <a href="" class="btn btn-link">xoá</a>
+            </td>
         </tr>
          {{/each}}
     </tbody>

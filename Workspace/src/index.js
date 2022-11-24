@@ -6,6 +6,8 @@ const app = express();
 const port = 3000;
 const route = require('./routes');
 const db = require('./config/mongodb');
+const methodOverride = require('method-override')
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 //Db
@@ -21,15 +23,22 @@ app.use(express.json());
 //HTTP logger
 app.use(morgan('combined'));
 
+app.use(methodOverride('_method'))
+
 //Template engine
 app.engine(
     'hbs',
     engine({
         extname: '.hbs',
+        helpers: {
+            sum: (a,b) => a + b
+        }
     }),
 );
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources','views'));
+
+
 
 route(app);
 
