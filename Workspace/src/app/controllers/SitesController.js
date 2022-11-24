@@ -16,7 +16,6 @@ class SitesController {
     }
     home(req, res, next) {
 
-        // res.render('home');
         Course.find({})
             .then(courses => {
                 res.render('home',{
